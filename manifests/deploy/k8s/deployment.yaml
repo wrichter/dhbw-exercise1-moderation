@@ -9,6 +9,7 @@ metadata:
     app.kubernetes.io/component: moderation
     app.kubernetes.io/instance: moderation
     app.kubernetes.io/part-of: dhbw-exercise-1
+    app.openshift.io/runtime: nodejs
   name: moderation
 spec:
   progressDeadlineSeconds: 600
