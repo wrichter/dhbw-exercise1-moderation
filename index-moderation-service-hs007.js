@@ -12,7 +12,7 @@ app.post('/events', async (req, res) => {
   if (type === 'CommentCreated') {
     const status = data.content.includes('werbung') ? 'rejected' : 'approved';
     console.log('status', status);
-    await axios.post('http://docker-compose_dhbw-exercise1-nodejs-eventbus_1:4005/events', {
+    await axios.post('http://event-bus:4005/events', {
       type: 'CommentModerated',
       data: {
         id: data.id,
