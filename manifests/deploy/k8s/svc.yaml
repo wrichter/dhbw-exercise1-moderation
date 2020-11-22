@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: moderation
+    app.kubernetes.io/component: moderation
+    app.kubernetes.io/instance: moderation
+    app.kubernetes.io/part-of: dhbw-exercise-1
+  name: moderation
+spec:
+  ports:
+  - name: 4003-tcp
+    port: 4003
+    protocol: TCP
+    targetPort: 4003
+  selector:
+    app: moderation
+    deploymentconfig: moderation
+  sessionAffinity: None
+  type: ClusterIP

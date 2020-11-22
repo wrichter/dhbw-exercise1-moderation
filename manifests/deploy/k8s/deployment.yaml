@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"moderation:latest","namespace":"wrichter-dhbw-exercise-1"},"fieldPath":"spec.template.spec.containers[?(@.name==\"moderation\")].image","pause":"false"}]'
+  labels:
+    app: moderation
+    app.kubernetes.io/component: moderation
+    app.kubernetes.io/instance: moderation
+    app.kubernetes.io/part-of: dhbw-exercise-1
+  name: moderation
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: moderation
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: moderation
+        deploymentconfig: moderation
+    spec:
+      containers:
+      - image: replace/me/moderation:latest
+        imagePullPolicy: Always
+        name: moderation
+        ports:
+        - containerPort: 4003
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

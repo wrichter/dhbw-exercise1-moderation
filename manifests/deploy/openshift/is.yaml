@@ -1,0 +1,21 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  labels:
+    app: moderation
+    app.kubernetes.io/component: moderation
+    app.kubernetes.io/instance: moderation
+    app.kubernetes.io/part-of: dhbw-exercise-1
+  name: moderation
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+  - from:
+      kind: DockerImage
+      name: replace/me/moderation:latest
+    importPolicy:
+      scheduled: true
+    name: latest
+    referencePolicy:
+      type: Source

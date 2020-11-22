@@ -1,0 +1,7 @@
+resources:
+- secrets.yaml
+- bc.yaml
+#- is.yaml
+
+configurations:
+- kustomizeconfig/buildconfig.yaml
